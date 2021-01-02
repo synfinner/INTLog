@@ -21,7 +21,6 @@ def get_db_connection():
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'WTFAMIDOINGWITHMYLIFE'
-app.debug = True
 fa = FontAwesome(app)
 
 def get_inv(inv_id):
@@ -171,4 +170,5 @@ def index(page=1):
     return render_template('index.html',investigations=investigations)
 
 
-
+if __name__ == "__main__":
+    app.run()
