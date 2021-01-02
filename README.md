@@ -38,3 +38,9 @@ CREATE TABLE "artifacts" (
 	FOREIGN KEY("investigation_id") REFERENCES "investigations"("id")
 )
 ```
+
+## Screenshots
+
+Index page: 
+
+![](git_images/index.png)
