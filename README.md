@@ -12,6 +12,7 @@ This project is in an EXTREMELY early stage. Stuff is likely terrible.
 - Likely fix things
 - Export to JSON
 - Clean up templates
+- Move artifact types to sqlite table so we can dynamically generate types when adding a new artifact. 
 - Contemplate existence
 - Drink coffee
 
