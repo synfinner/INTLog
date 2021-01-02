@@ -17,6 +17,13 @@ This project is in an EXTREMELY early stage. Stuff is likely terrible.
 
 ## Setup
 
+Setup env: 
+
+```
+python3 -m venv env
+source env/bin/activate
+```
+
 Install requirements: `pip3 install -r requirements.txt`
 
 ### Setup SQLite
