@@ -29,6 +29,10 @@ Install requirements: `pip3 install -r requirements.txt`
 
 ### Setup SQLite
 
+To setup the db, execute the `create_db.py` file. This will create all of the current tables and fields (easiest if you just want to be up and running).
+
+**Manual Method:**
+
 Create a new SQLite db within the `data` directory named `intlog.sqlite`
 
 **Setup the investigations table:**
