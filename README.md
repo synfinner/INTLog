@@ -4,6 +4,17 @@ INTLog is a simple Flask app designed to keep track of potentially interesting a
 
 This application was designed to help me keep track of artifacts that I may stumble across during an investigation. I was originally using things like notepad, maltego, jupyter, and a bunch of other apps. The problem I ran into is that I needed a simple wheel, not a nuclear reactor to log what I was seeing. Secondly, I wanted something that could be hosted locally and data kept on my disk. And just like that, INTLog was born. Simplicity is the name of the game here. This app caters specifically to my needs and maybe it will help you too.
 
+This project is in an EXTREMELY early stage. Stuff is likely terrible.
+
+**TODO:**
+
+- Support pagination
+- Likely fix things
+- Export to JSON
+- Clean up templates
+- Contemplate existence
+- Drink coffee
+
 ## Setup
 
 Install requirements: `pip3 install -r requirements.txt`
@@ -44,3 +55,7 @@ CREATE TABLE "artifacts" (
 Index page: 
 
 ![](git_images/index.png)
+
+Viewing an investigation (note: this is just simulated and random data for testing): 
+
+![](git_images/investigation.png)
