@@ -20,8 +20,8 @@ This project is in an EXTREMELY early stage. Stuff is likely terrible.
 Setup env: 
 
 ```
-python3 -m venv env
-source env/bin/activate
+INTLog » python3 -m venv env
+INTLog » source env/bin/activate
 ```
 
 Install requirements: `pip3 install -r requirements.txt`
