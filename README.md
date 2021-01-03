@@ -62,6 +62,21 @@ CREATE TABLE "artifacts" (
 )
 ```
 
+## Exporting Data
+
+INTLog allows you to export all artifacts within an investigtion to a csv file. This allows for importing into other tools or making a backup of artifacts.
+
+## What this project isn't
+
+- This project is not meant to be a replacement for commercial or even open source intel tools. Rather, it is meant purely as an assistive tool for artifact management. As previously stated, the idea is to keep track of interesting artifacts in a simple note per investigation. 
+- This tool is not meant to be super advanced and crazy. I began this project with wanting something simple.
+
+## Contributing
+
+If you ever feel so inclined to help out and make things better, please feel free to submit a pull request and I will happily take a look. 
+
+Should you find this helpful in any way, feel free to let me know on twitter: https://twitter.com/synfinner
+
 ## Screenshots
 
 Index page: 
