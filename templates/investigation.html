@@ -35,7 +35,7 @@
             <td><font style="font-family:monospace">{{ artifact['artifact_type'] }}</font></td>
             <td><font style="font-family:monospace">{{ artifact['artifact_desc'] }}</font></td>
             <td><font style="font-family:monospace">{{ artifact['artifact_date'] }}</font></td>
-            <td><a title="Delete" class="fas fa-trash-alt" href="{{ url_for('delete_artifact', artifact_id = artifact['id']) }}"></a> | <a title="Edit" class="fas fa-edit" href="{{ url_for('edit_artifact', inv_id=investigation['id'],artifact_id = artifact['id'])}}"></a></td>
+            <td><a title="Delete" class="badge badge-danger" href="{{ url_for('delete_artifact', artifact_id = artifact['id']) }}">Delete</a> | <a title="Edit" class="badge badge-primary" href="{{ url_for('edit_artifact', inv_id=investigation['id'],artifact_id = artifact['id'])}}">Edit</a></td>
         </tr>
         {% endfor %}
     </tbody>

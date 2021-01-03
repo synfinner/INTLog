@@ -4,49 +4,37 @@
 <h1>{% block title %} Edit Artifact {% endblock %}</h1>
 <hr>
 <form method="post">
-  <!--
     <div class="form-group">
-        <label for="artifact">Artifact</label>
-        <input type="text" name="artifact"
-               placeholder="Found URL" class="form-control"
-               value="{{ request.form['artifact'] }}"></input>
-    </div>
-  -->
-    <div class="form-group">
-      <label for="type">Choose artifact type:</label><br />
-      <select name="type">
-        <option value="{{ request.form['type'] or artifact['artifact_type']}}" SELECTED>{{ request.form['type'] or artifact['artifact_type'] }}</option>
-        <option value="Address">Address{{request.form['type']}}</option>
-        <option value="CIDR">CIDR{{request.form['type']}}</option>
-        <option value="Domain">Domain{{request.form['type']}}</option>
-        <option value="email">email{{request.form['type']}}</option>
-        <option value="HumanName">HumanName{{request.form['type']}}</option>
-        <option value="IP">IP{{request.form['type']}}</option>
-        <option value="MD5">MD5{{request.form['type']}}</option>
-        <option value="Organization">Organization{{request.form['type']}}</option>
-        <option value="SHA1">SHA1{{request.form['type']}}</option>
-        <option value="SHA256">SHA256{{request.form['type']}}</option>
-        <option value="TwitterUser">TwitterUser{{request.form['type']}}</option>
-        <option value="URL">URL{{request.form['type']}}</option>
-        <option value="Username">Username{{request.form['type']}}</option>
-        <option value="Misc">Misc{{request.form['type']}}</option>        
-      </select>
+        <label for="type">Choose artifact type:</label><br />
+        <select name="type">
+            <option value="{{ request.form['type'] or artifact['artifact_type']}}" SELECTED>{{ request.form['type'] or artifact['artifact_type'] }}</option>
+            <option value="Address">Address{{request.form['type']}}</option>
+            <option value="CIDR">CIDR{{request.form['type']}}</option>
+            <option value="Domain">Domain{{request.form['type']}}</option>
+            <option value="email">email{{request.form['type']}}</option>
+            <option value="HumanName">HumanName{{request.form['type']}}</option>
+            <option value="IP">IP{{request.form['type']}}</option>
+            <option value="MD5">MD5{{request.form['type']}}</option>
+            <option value="Organization">Organization{{request.form['type']}}</option>
+            <option value="SHA1">SHA1{{request.form['type']}}</option>
+            <option value="SHA256">SHA256{{request.form['type']}}</option>
+            <option value="TwitterUser">TwitterUser{{request.form['type']}}</option>
+            <option value="URL">URL{{request.form['type']}}</option>
+            <option value="Username">Username{{request.form['type']}}</option>
+            <option value="Misc">Misc{{request.form['type']}}</option>
+        </select>
     </div>
     <div class="form-group">
         <label for="artifact">Artifact Data</label>
-        <input type="text" name="artifact_data"
-               placeholder="" class="form-control"
-               value="{{ request.form['artifact_data'] or artifact['artifact_reference'] }}"></input>
+        <input type="text" name="artifact_data" placeholder="" class="form-control" value="{{ request.form['artifact_data'] or artifact['artifact_reference'] }}"></input>
     </div>
     <div class="form-group">
         <label for="artifact">Artifact Description</label>
-        <input type="text" name="artifact_description"
-               placeholder="Found this item interesting becasue..." class="form-control"
-               value="{{ request.form['artifact_description'] or artifact['artifact_desc'] }}"></input>
+        <input type="text" name="artifact_description" placeholder="Found this item interesting because..." class="form-control" value="{{ request.form['artifact_description'] or artifact['artifact_desc'] }}"></input>
     </div>
     <div class="form-group">
-      <button type="button" class="btn btn-primary" onclick="history.back()">Cancel</button>
-      <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="history.back()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
 {% endblock %}
