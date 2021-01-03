@@ -91,7 +91,8 @@ def export_artifacts(inv_id):
     conn = get_db_connection()
     si = io.StringIO()
     cw = csv.writer(si)
-    rows = conn.execute('SELECT artifact_reference, artifact_type, artifact_desc, artifact_date FROM artifacts WHERE investigation_id = ?', (inv_id,)).fetchall()
+    rows = conn.execute('SELECT artifact_reference, artifact_type, artifact_desc, artifact_date FROM artifacts WHERE investigation_id = ?',
+                        (inv_id,)).fetchall()
     cw.writerows(rows)
     output = make_response(si.getvalue())
     output.headers["Content-Disposition"] = "attachment; filename=artifact_export.csv"
