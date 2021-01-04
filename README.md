@@ -114,4 +114,4 @@ Index page:
 
 Viewing an investigation (note: this is just simulated and random data for testing): 
 
-![](git_images/investigation.png)
+![](git_images/investigation-2.png)
