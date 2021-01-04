@@ -53,16 +53,16 @@ CREATE TABLE investigations (
 **Setup the artifacts table:**
 
 ```
-CREATE TABLE "artifacts" (
-	"id"	integer NOT NULL,
-	"investigation_id"	integer(128),
-	"artifact_name"	char(128),
-	"artifact_type"	char(128),
-	"artifact_desc"	varchar(250),
-	"artifact_reference"	varchar(250),
-	"artifact_date"	timestamp(128),
-	PRIMARY KEY("id" AUTOINCREMENT),
-	FOREIGN KEY("investigation_id") REFERENCES "investigations"("id")
+CREATE TABLE artifacts (
+  id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+  investigation_id integer(128),
+  artifact_name char(128),
+  artifact_type char(128),
+  artifact_desc varchar(250),
+  artifact_reference varchar(250),
+  artifact_date timestamp(128),
+  flagged int(4),
+  FOREIGN KEY (investigation_id) REFERENCES investigations (id)
 )
 ```
 

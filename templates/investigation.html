@@ -21,6 +21,7 @@
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search artifacts..." title="Type in data">
     <thead>
         <tr>
+            <th>Priority</th>
             <th>Artifact</th>
             <th>Artifact Type</th>
             <th>Description</th>
@@ -31,6 +32,7 @@
     <tbody>
         {% for artifact in artifacts %}
         <tr>
+            <td>{%if artifact['flagged'] == 1%}<a title="Remove flag" style="color:red"class="fas fa-flag" href="{{ url_for('rem_flag', artifact_id = artifact['id']) }}"></a>{% else %}<a title="Add flag" style="color:gray"class="fas fa-flag" href="{{ url_for('add_flag', artifact_id = artifact['id']) }}"></a>{% endif %}</td>
             <td><font style="font-family:monospace">{{ artifact['artifact_reference'] }}</font></td>
             <td><font style="font-family:monospace">{{ artifact['artifact_type'] }}</font></td>
             <td><font style="font-family:monospace">{{ artifact['artifact_desc'] }}</font></td>

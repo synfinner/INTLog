@@ -118,6 +118,30 @@ def delete_artifact(artifact_id):
     flash("Removed artifact!")
     return redirect(request.referrer)
 
+@app.route('/add_flag/<int:artifact_id>', methods=('GET',))
+def add_flag(artifact_id):
+    conn = get_db_connection()
+    conn.execute('UPDATE artifacts SET flagged=? WHERE id=?',(1,artifact_id))
+    conn.commit()
+    return redirect(request.referrer)
+
+@app.route('/rem_flag/<int:artifact_id>', methods=('GET',))
+def rem_flag(artifact_id):
+    conn = get_db_connection()
+    conn.execute('UPDATE artifacts SET flagged=? WHERE id=?',(0,artifact_id))
+    conn.commit()
+    return redirect(request.referrer)
+
+def add_flag(artifact_id):
+    conn = get_db_connection()
+    flagged = conn.execute('SELECT flagged FROM artifacts WHERE id = ?',(artifact_id,)).fetchone()
+    if flagged == 0 or flagged == None:
+        conn.execute('UPDATE artifacts SET flagged=? WHERE id=?',(1,artifact_id))
+    if flagged == 1:
+        conn.execute('UPDATE artifacts SET flagged=? WHERE id=?',(0,artifact_id))
+    conn.commit()
+    return redirect(request.referrer)
+
 @app.route('/delete_investigation/<int:inv_id>',methods=('POST','GET'))
 def delete_investigation(inv_id):
     conn = get_db_connection()
