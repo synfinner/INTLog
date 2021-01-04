@@ -132,16 +132,6 @@ def rem_flag(artifact_id):
     conn.commit()
     return redirect(request.referrer)
 
-def add_flag(artifact_id):
-    conn = get_db_connection()
-    flagged = conn.execute('SELECT flagged FROM artifacts WHERE id = ?',(artifact_id,)).fetchone()
-    if flagged == 0 or flagged == None:
-        conn.execute('UPDATE artifacts SET flagged=? WHERE id=?',(1,artifact_id))
-    if flagged == 1:
-        conn.execute('UPDATE artifacts SET flagged=? WHERE id=?',(0,artifact_id))
-    conn.commit()
-    return redirect(request.referrer)
-
 @app.route('/delete_investigation/<int:inv_id>',methods=('POST','GET'))
 def delete_investigation(inv_id):
     conn = get_db_connection()
@@ -157,7 +147,6 @@ def delete_investigation(inv_id):
     return redirect(url_for('index'))
 
 @app.route('/edit_artifact/<int:artifact_id>',methods=('POST','GET'))
-#@app.route('/investigation/<int:inv_id>/edit_artifact/<int:artifact_id>',methods=('POST','GET'))
 def edit_artifact(artifact_id):
     args = request.args
     artifact = get_artifact(artifact_id)
@@ -182,8 +171,8 @@ def edit_artifact(artifact_id):
                 return redirect(url_for('index'))
     return render_template('edit_artifact.html',artifact=artifact, types=types)
 
-
 @app.route('/<int:inv_id>')
+@app.route('/<int:inv_id>/')
 def investigation(inv_id):
     investigation = get_inv(inv_id)
     artifacts = get_artifacts(inv_id)
@@ -193,9 +182,7 @@ def investigation(inv_id):
 def about():
     return render_template('about.html')
 
-
 @app.route('/')
-#@app.route('/page/<int:page>')
 def index(page=1):
     #return "wtf"
     conn = get_db_connection()
