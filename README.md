@@ -12,7 +12,7 @@ This project is in an EXTREMELY early stage. Stuff is likely terrible.
 - Likely fix things
 - Export to JSON
 - Clean up templates
-- Move artifact types to sqlite table so we can dynamically generate types when adding a new artifact. 
+- ~~Move artifact types to sqlite table so we can dynamically generate types when adding a new artifact.~~ 
 - Contemplate existence
 - Drink coffee
 
@@ -27,11 +27,15 @@ INTLog » source env/bin/activate
 
 Install requirements: `pip3 install -r requirements.txt`
 
+Once the requirements are installed, proceed to setting up the SQLite db.
+
 ### Setup SQLite
+
+#### Automated Method
 
 To setup the db, execute the `create_db.py` file. This will create all of the current tables and fields (easiest if you just want to be up and running).
 
-**Manual Method:**
+#### Manual Method
 
 Create a new SQLite db within the `data` directory named `intlog.sqlite`
 
@@ -60,6 +64,31 @@ CREATE TABLE "artifacts" (
 	PRIMARY KEY("id" AUTOINCREMENT),
 	FOREIGN KEY("investigation_id") REFERENCES "investigations"("id")
 )
+```
+
+**Setup the types table:**
+
+```
+CREATE TABLE IF NOT EXISTS types (
+  id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+  type varchar(128)
+);
+
+INSERT INTO types (id, type) VALUES
+(1, 'Mailing Address'),
+(2, 'Misc'),
+(3, 'Username'),
+(4, 'URL'),
+(5, 'TweetURL'),
+(6, 'TwitterUser'),
+(7, 'SHA256'),
+(8, 'SHA1'),
+(9, 'Organization'),
+(10, 'MD5'),
+(11, 'IP'),
+(12, 'HumanName'),
+(13, 'Domain'),
+(14, 'CIDR');
 ```
 
 ## Exporting Data

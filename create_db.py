@@ -27,4 +27,24 @@ c.execute('''CREATE TABLE "artifacts" (
     FOREIGN KEY("investigation_id") REFERENCES "investigations"("id")
 )''')
 
+c.execute('''CREATE TABLE types (
+  id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+  type varchar(128)
+)''')
+
+c.execute("""INSERT INTO types (id, type) VALUES
+(1, 'Mailing Address'),
+(2, 'Misc'),
+(3, 'Username'),
+(4, 'URL'),
+(5, 'TweetURL'),
+(6, 'TwitterUser'),
+(7, 'SHA256'),
+(8, 'SHA1'),
+(9, 'Organization'),
+(10, 'MD5'),
+(11, 'IP'),
+(12, 'HumanName'),
+(13, 'Domain'),
+(14, 'CIDR');""")
 conn.commit()

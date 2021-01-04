@@ -8,20 +8,9 @@
         <label for="type">Choose artifact type:</label><br />
         <select name="type">
             <option value="{{ request.form['type'] or artifact['artifact_type']}}" SELECTED>{{ request.form['type'] or artifact['artifact_type'] }}</option>
-            <option value="Address">Address{{request.form['type']}}</option>
-            <option value="CIDR">CIDR{{request.form['type']}}</option>
-            <option value="Domain">Domain{{request.form['type']}}</option>
-            <option value="email">email{{request.form['type']}}</option>
-            <option value="HumanName">HumanName{{request.form['type']}}</option>
-            <option value="IP">IP{{request.form['type']}}</option>
-            <option value="MD5">MD5{{request.form['type']}}</option>
-            <option value="Organization">Organization{{request.form['type']}}</option>
-            <option value="SHA1">SHA1{{request.form['type']}}</option>
-            <option value="SHA256">SHA256{{request.form['type']}}</option>
-            <option value="TwitterUser">TwitterUser{{request.form['type']}}</option>
-            <option value="URL">URL{{request.form['type']}}</option>
-            <option value="Username">Username{{request.form['type']}}</option>
-            <option value="Misc">Misc{{request.form['type']}}</option>
+            {% for type in types %}
+              <option value="{{type['type']}}">{{type['type']}}{{request.form['type']}}</option>
+            {% endfor %}
         </select>
     </div>
     <div class="form-group">

@@ -50,6 +50,14 @@ def get_artifact(article_id):
         abort(404)
     return artifacts
 
+def get_types():
+    conn = get_db_connection()
+    types = conn.execute('SELECT * FROM types ORDER BY type ASC').fetchall()
+    conn.close()
+    if types is None:
+        abort(404)
+    return types
+
 @app.route('/create', methods=('GET', 'POST'))
 def create():
     if request.method == 'POST':
@@ -84,7 +92,8 @@ def add_artifact(inv_id):
             conn.commit()
             conn.close()
             return redirect(url_for('investigation',inv_id = inv_id))
-    return render_template('add_artifact.html')
+    types = get_types()
+    return render_template('add_artifact.html',types=types)
 
 @app.route('/<int:inv_id>/export_artifacts',methods=('GET', 'POST'))
 def export_artifacts(inv_id):
@@ -106,6 +115,7 @@ def delete_artifact(artifact_id):
     conn.execute('DELETE FROM artifacts WHERE id = ?', (artifact_id,))
     conn.commit()
     conn.close()
+    flash("Removed artifact!")
     return redirect(request.referrer)
 
 @app.route('/delete_investigation/<int:inv_id>',methods=('POST','GET'))
@@ -127,6 +137,7 @@ def delete_investigation(inv_id):
 def edit_artifact(artifact_id):
     args = request.args
     artifact = get_artifact(artifact_id)
+    types = get_types()
     if request.method == 'POST':
         #artifact = request.form['artifact']
         artifact_type = request.form['type']
@@ -141,12 +152,11 @@ def edit_artifact(artifact_id):
                          (artifact_type, artifact_data, artifact_desc,artifact_id))
             conn.commit()
             conn.close()
-            flash('Removed artifact!')
             if len(args) > 0:
                 return redirect(url_for('investigation',inv_id = args['inv_id']))
             else:
                 return redirect(url_for('index'))
-    return render_template('edit_artifact.html',artifact=artifact)
+    return render_template('edit_artifact.html',artifact=artifact, types=types)
 
 
 @app.route('/<int:inv_id>')
