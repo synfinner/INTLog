@@ -16,10 +16,11 @@
     </a>
     <hr>
     <p>
-  <div style="padding: 10px; overflow:scroll; overflow-y:scroll; ">
+  <div style="padding: 10px; overflow:scroll; overflow-y:scroll; " class="table-responsive">
     <table id="myTable" class="table table-striped" style="width:100%">
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search artifacts..." title="Type in data">
-    <thead>
+        <caption>Artifacts</caption>
+    <thead class="table-dark">
         <tr>
             <th class="flagged">Priority</th>
             <th>Artifact</th>
@@ -32,7 +33,7 @@
     <tbody>
         {% for artifact in artifacts %}
         <tr>
-            <td>{%if artifact['flagged'] == 1%}<a title="Remove flag" style="color:red"class="fas fa-flag" href="{{ url_for('rem_flag', artifact_id = artifact['id']) }}"></a>{% else %}<a title="Add flag" style="color:gray"class="fas fa-flag" href="{{ url_for('add_flag', artifact_id = artifact['id']) }}"></a>{% endif %}</td>
+            <td >{%if artifact['flagged'] == 1%}<a title="Remove flag" style="color:red"class="fas fa-flag" href="{{ url_for('rem_flag', artifact_id = artifact['id']) }}"></a>{% else %}<a title="Add flag" style="color:gray"class="fas fa-flag" href="{{ url_for('add_flag', artifact_id = artifact['id']) }}"></a>{% endif %}</td>
             <td><font style="font-family:monospace">{{ artifact['artifact_reference'] }}</font></td>
             <td><font style="font-family:monospace">{{ artifact['artifact_type'] }}</font></td>
             <td><font style="font-family:monospace">{{ artifact['artifact_desc'] }}</font></td>
@@ -51,7 +52,7 @@ function myFunction() {
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[1];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
