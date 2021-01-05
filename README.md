@@ -141,3 +141,7 @@ Index page:
 Viewing an investigation (note: this is just simulated and random data for testing): 
 
 ![](git_images/investigation-2.png)
+
+Basic Bootstrap timeline of artifacts:
+
+![](git_images/timeline_basic.png)
