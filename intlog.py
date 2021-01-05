@@ -7,6 +7,7 @@ from flask import url_for
 from flask import flash
 from flask import redirect
 from flask import make_response
+from flask import jsonify
 from flask_fontawesome import FontAwesome
 import sqlite3
 from werkzeug.exceptions import abort
@@ -57,6 +58,22 @@ def get_types():
     if types is None:
         abort(404)
     return types
+
+@app.route('/json_exp/<int:inv_id>')
+def json_exp(inv_id):
+    conn = get_db_connection()
+    artifacts = conn.execute('SELECT * FROM artifacts WHERE investigation_id = ?',
+                        (inv_id,)).fetchall()
+    conn.close()
+    if artifacts is None:
+        abort(404)
+    #data = []
+    data = []
+    for row in artifacts:
+        #data.append(list(row))
+        data.append({'id':row[0],'artifact_type':row[3],'artifact_description':row[4],'artifact':row[5],'date_added':row[6],'flagged':row[7]})
+    return jsonify(data)
+
 
 @app.route('/create', methods=('GET', 'POST'))
 def create():
