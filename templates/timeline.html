@@ -19,7 +19,7 @@
         {% for artifact in artifacts %}
         <li>
           <a><b>{{ artifact['artifact_type'] }}</b> - <i>{{ artifact['artifact_reference'] }}</i></a>
-          <a class="float-right">{{ artifact['artifact_date'] }}</a>
+          <span class="badge badge-primary float-right">{{ artifact['artifact_date'] }}</span>
           <p><font style="font-family:monospace">{{ artifact['artifact_desc'] }}</font></p>
         </li>
         {% endfor %}
