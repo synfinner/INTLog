@@ -42,6 +42,15 @@ def get_artifacts(inv_id):
         abort(404)
     return artifacts
 
+def get_artifacts_date_asc(inv_id):
+    conn = get_db_connection()
+    artifacts = conn.execute('SELECT * FROM artifacts WHERE investigation_id = ? ORDER BY artifact_date ASC',
+                        (inv_id,)).fetchall()
+    conn.close()
+    if artifacts is None:
+        abort(404)
+    return artifacts
+
 def get_artifact(article_id):
     conn = get_db_connection()
     artifacts = conn.execute('SELECT * FROM artifacts WHERE id = ?',
@@ -58,6 +67,13 @@ def get_types():
     if types is None:
         abort(404)
     return types
+
+@app.route('/<int:inv_id>/timeline')
+def timeline(inv_id):
+    artifacts = get_artifacts_date_asc(inv_id)
+    investigation = get_inv(inv_id)
+    return render_template('timeline.html', investigation=investigation,artifacts=artifacts)
+
 
 @app.route('/json_exp/<int:inv_id>')
 def json_exp(inv_id):

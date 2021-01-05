@@ -11,9 +11,13 @@
     <a href="{{ url_for('add_artifact', inv_id=investigation['id']) }}">
     		<button type="button" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Add Artifact</button>
     </a> | 
+    <a href="{{ url_for('timeline', inv_id=investigation['id']) }}">
+            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-project-diagram"></i> Artifact Timeline</button>
+    </a> |
     <a href="{{ url_for('export_artifacts', inv_id=investigation['id']) }}">
             <button type="button" class="btn btn-info btn-sm"><i class="fas fa-download"></i> Export Artifacts (CSV)</button>
-    </a>
+    </a>  
+
     <hr>
     <p>
   <div style="padding: 10px; overflow:scroll; overflow-y:scroll; " class="table-responsive">
