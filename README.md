@@ -95,6 +95,32 @@ INSERT INTO types (id, type) VALUES
 
 INTLog allows you to export all artifacts within an investigtion to a csv file. This allows for importing into other tools or making a backup of artifacts.
 
+### JSON Output
+
+Users can pull investigation data in JSON format by accessing the `/json_exp/` endpoint. For example, `http://127.0.0.1:5000/json_exp/3` outputs: 
+
+```
+[
+  {
+    "artifact": "t0psecr3t.co.uk", 
+    "artifact_description": "Found this artifact in article: https://awesomeinfosecblog.com", 
+    "artifact_type": "Domain", 
+    "date_added": "2021-01-02T00:33:43", 
+    "flagged": 1, 
+    "id": 12
+  }, 
+ ...snip... 
+  {
+    "artifact": "200.105.28.4", 
+    "artifact_description": "Points to t0psecr3t.co.uk", 
+    "artifact_type": "IP", 
+    "date_added": "2021-01-02T00:41:50", 
+    "flagged": null, 
+    "id": 16
+  }
+ ]
+```
+
 ## What this project isn't
 
 - This project is not meant to be a replacement for commercial or even open source intel tools. Rather, it is meant purely as an assistive tool for artifact management. As previously stated, the idea is to keep track of interesting artifacts in a simple note per investigation. 
