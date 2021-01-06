@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% block title %}{{ investigation['investigation_name'] }}{% endblock %}
     {% if investigation['investigation_archived'] == 1%}
         <h2 style="color:gray">[Archived] {{ investigation['investigation_name'] }}</h2>
 
