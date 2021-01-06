@@ -139,12 +139,16 @@ Should you find this helpful in any way, feel free to let me know on twitter: ht
 
 Index page: 
 
-![](git_images/index.png)
+![](git_images/index2.png)
 
 Viewing an investigation (note: this is just simulated and random data for testing): 
 
-![](git_images/investigation-2.png)
+![](git_images/investigation-3.png)
 
 Basic Bootstrap timeline of artifacts:
 
 ![](git_images/timeline_basic.png)
+
+Archive
+
+![](git_images/archive.png)
