@@ -7,11 +7,13 @@ conn = sqlite3.connect('data/intlog.sqlite')
 c = conn.cursor()
 
 # Create Investigations table
-c.execute(''' CREATE TABLE investigations (
-  id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-  investigation_name varchar(128),
-  investigation_date timestamp(128),
-  investigation_desc text(250)
+c.execute('''CREATE TABLE "investigations" (
+  "id"  integer NOT NULL,
+  "investigation_name"  varchar(128),
+  "investigation_date"  timestamp(128),
+  "investigation_desc"  text(250),
+  "investigation_archived"  INTEGER(4),
+  PRIMARY KEY("id" AUTOINCREMENT)
 )''')
 
 # Create Artifacts table
@@ -27,6 +29,7 @@ c.execute('''CREATE TABLE artifacts (
   FOREIGN KEY (investigation_id) REFERENCES investigations (id)
 )''')
 
+# Create Types table
 c.execute('''CREATE TABLE types (
   id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
   type varchar(128)

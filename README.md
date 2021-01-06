@@ -42,11 +42,13 @@ Create a new SQLite db within the `data` directory named `intlog.sqlite`
 **Setup the investigations table:**
 
 ```
-CREATE TABLE investigations (
-  id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-  investigation_name varchar(128),
-  investigation_date timestamp(128),
-  investigation_desc text(250)
+CREATE TABLE "investigations" (
+	"id"	integer NOT NULL,
+	"investigation_name"	varchar(128),
+	"investigation_date"	timestamp(128),
+	"investigation_desc"	text(250),
+	"investigation_archived"	INTEGER(4),
+	PRIMARY KEY("id" AUTOINCREMENT)
 )
 ```
 
@@ -88,7 +90,8 @@ INSERT INTO types (id, type) VALUES
 (11, 'IP'),
 (12, 'HumanName'),
 (13, 'Domain'),
-(14, 'CIDR');
+(14, 'Email'),
+(15, 'CIDR');
 ```
 
 ## Exporting Data
