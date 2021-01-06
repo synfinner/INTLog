@@ -4,12 +4,15 @@
     <h1 class="fas fa-user-secret">{% block title %} INTLog {% endblock %}</h1>
     <p><font style="font-family:monospace">Log your intelligence artifacts</font></p>
     <br>
+    {% if investigations|length < 1%}
+    <p>Hey! You don't have any active investigations! Go ahead an make a new investigation :)</p>
+    {% endif %}
     {% for investigation in investigations %}
     	<a href="{{ url_for('investigation', inv_id=investigation['id']) }}">
     		<h2>> Investigation: {{ investigation['investigation_name']}}</h2>
     	</a>
     	<i class="fas fa-calendar-alt"></i>
-    	<span class="badge badge-primary">{{ investigation['investigation_date'] }}</span> | <a title="Delete" class="fas fa-trash-alt" href="{{ url_for('delete_investigation', inv_id = investigation['id']) }}"></a>
+    	<span class="badge badge-primary">{{ investigation['investigation_date'] }}</span> | <a class="badge badge-warning" href="{{ url_for('archive_inv', inv_id=investigation['id']) }}"><i class="fas fa-archive"></i> Archive Investigation</a> | <a style="color:red" title="Delete" class="fas fa-trash-alt" href="{{ url_for('delete_investigation', inv_id = investigation['id']) }}"></a>
     	<p>
     	<font style="font-family:monospace">
     		<p>{{ investigation['investigation_desc'] }}<p>

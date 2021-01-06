@@ -179,6 +179,20 @@ def delete_investigation(inv_id):
     flash('Deleted investigation!')
     return redirect(url_for('index'))
 
+@app.route('/archive_inv/<int:inv_id>', methods=('GET',))
+def archive_inv(inv_id):
+    conn = get_db_connection()
+    conn.execute('UPDATE investigations SET investigation_archived=? WHERE id=?',(1,inv_id))
+    conn.commit()
+    return redirect(request.referrer)
+
+@app.route('/unarchive_inv/<int:inv_id>', methods=('GET',))
+def unarchive_inv(inv_id):
+    conn = get_db_connection()
+    conn.execute('UPDATE investigations SET investigation_archived=? WHERE id=?',(0,inv_id))
+    conn.commit()
+    return redirect(request.referrer)
+
 @app.route('/edit_artifact/<int:artifact_id>',methods=('POST','GET'))
 def edit_artifact(artifact_id):
     args = request.args
@@ -215,11 +229,19 @@ def investigation(inv_id):
 def about():
     return render_template('about.html')
 
+@app.route('/archive')
+def archive():
+    conn = get_db_connection()
+    investigations = conn.execute('SELECT * FROM investigations WHERE investigation_archived == 1 ORDER BY investigation_date DESC').fetchall()
+    #print(investigations)
+    conn.close()
+    return render_template('archive.html',investigations=investigations) 
+
 @app.route('/')
 def index(page=1):
     #return "wtf"
     conn = get_db_connection()
-    investigations = conn.execute('SELECT * FROM investigations ORDER BY investigation_date DESC').fetchall()
+    investigations = conn.execute('SELECT * FROM investigations WHERE investigation_archived == 0 OR investigation_archived IS NULL ORDER BY investigation_date DESC').fetchall()
     #print(investigations)
     conn.close()
     return render_template('index.html',investigations=investigations)

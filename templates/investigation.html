@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>{% block title %} {{ investigation['investigation_name'] }} {% endblock %}</h2>
+    {% if investigation['investigation_archived'] == 1%}
+        <h2 style="color:gray">[Archived] {{ investigation['investigation_name'] }}</h2>
+
+    {%else%}
+        <h2>{{ investigation['investigation_name'] }}</h2>
+
+    {% endif %}
     <i class="fas fa-calendar-alt"></i>
-    <span class="badge badge-primary">{{ investigation['investigation_date'] }}</span> | <a title="Delete" class="fas fa-trash-alt" href="{{ url_for('delete_investigation', inv_id = investigation['id']) }}"></a>
+    <span class="badge badge-primary">{{ investigation['investigation_date'] }}</span> | <a style="color:red" title="Delete" class="fas fa-trash-alt" href="{{ url_for('delete_investigation', inv_id = investigation['id']) }}"></a>
     <p>
     <p><font style="font-family:monospace">{{ investigation['investigation_desc'] }}</font></p>
     <hr>
