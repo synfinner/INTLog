@@ -46,5 +46,6 @@ c.execute("""INSERT INTO types (id, type) VALUES
 (11, 'IP'),
 (12, 'HumanName'),
 (13, 'Domain'),
-(14, 'CIDR');""")
+(14, 'Email'),
+(15, 'CIDR');""")
 conn.commit()
