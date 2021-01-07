@@ -4,7 +4,7 @@ import sqlite3
 
 def create_db():
 
-  conn = sqlite3.connect('data/intlog2.sqlite')
+  conn = sqlite3.connect('data/intlog.sqlite')
 
   c = conn.cursor()
 

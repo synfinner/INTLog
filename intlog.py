@@ -249,7 +249,7 @@ def index(page=1):
     return render_template('index.html',investigations=investigations)
 
 def checkdb():
-    if os.path.isfile('data/intlog2.sqlite'):
+    if os.path.isfile('data/intlog.sqlite'):
         pass
     else:
         create_db.create_db()
