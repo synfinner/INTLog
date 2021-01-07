@@ -27,72 +27,9 @@ INTLog » source env/bin/activate
 
 Install requirements: `pip3 install -r requirements.txt`
 
-Once the requirements are installed, proceed to setting up the SQLite db.
-
 ### Setup SQLite
 
-#### Automated Method
-
-To setup the db, execute the `create_db.py` file. This will create all of the current tables and fields (easiest if you just want to be up and running).
-
-#### Manual Method
-
-Create a new SQLite db within the `data` directory named `intlog.sqlite`
-
-**Setup the investigations table:**
-
-```
-CREATE TABLE "investigations" (
-	"id"	integer NOT NULL,
-	"investigation_name"	varchar(128),
-	"investigation_date"	timestamp(128),
-	"investigation_desc"	text(250),
-	"investigation_archived"	INTEGER(4),
-	PRIMARY KEY("id" AUTOINCREMENT)
-)
-```
-
-**Setup the artifacts table:**
-
-```
-CREATE TABLE artifacts (
-  id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-  investigation_id integer(128),
-  artifact_name char(128),
-  artifact_type char(128),
-  artifact_desc varchar(250),
-  artifact_reference varchar(250),
-  artifact_date timestamp(128),
-  flagged int(4),
-  FOREIGN KEY (investigation_id) REFERENCES investigations (id)
-)
-```
-
-**Setup the types table:**
-
-```
-CREATE TABLE IF NOT EXISTS types (
-  id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-  type varchar(128)
-);
-
-INSERT INTO types (id, type) VALUES
-(1, 'Mailing Address'),
-(2, 'Misc'),
-(3, 'Username'),
-(4, 'URL'),
-(5, 'TweetURL'),
-(6, 'TwitterUser'),
-(7, 'SHA256'),
-(8, 'SHA1'),
-(9, 'Organization'),
-(10, 'MD5'),
-(11, 'IP'),
-(12, 'HumanName'),
-(13, 'Domain'),
-(14, 'Email'),
-(15, 'CIDR');
-```
+This script will automatically create the sqlite file and necessary entries upon first run. 
 
 ## Exporting Data
 

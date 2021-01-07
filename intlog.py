@@ -14,6 +14,8 @@ from werkzeug.exceptions import abort
 import datetime
 import io
 import csv
+import os.path
+import create_db
 
 def get_db_connection():
     conn = sqlite3.connect('data/intlog.sqlite')
@@ -246,6 +248,12 @@ def index(page=1):
     conn.close()
     return render_template('index.html',investigations=investigations)
 
+def checkdb():
+    if os.path.isfile('data/intlog2.sqlite'):
+        pass
+    else:
+        create_db.create_db()
 
 if __name__ == "__main__":
+    checkdb()
     app.run()
