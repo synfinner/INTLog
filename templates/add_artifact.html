@@ -3,10 +3,12 @@
 {% block content %}
 <h1>{% block title %} Add an Artifact {% endblock %}</h1>
 <hr>
+<!-- POST request form for creating a new artifact -->
 <form method="post">
     <div class="form-group">
         <label for="type">Choose artifact type:</label><br />
         <select name="type">
+            <!-- Setup option selection for artifact types -->
           <option value="" SELECTED></option>
           {% for type in types %}
             <option value="{{type['type']}}">{{type['type']}}{{request.form['type']}}</option>
@@ -23,7 +25,9 @@
         <input type="text" name="artifact_description" placeholder="Found this item interesting because..." class="form-control" value="{{ request.form['artifact_description'] }}"></input>
     </div>
     <div class="form-group">
+        <!-- Go back to investigation on cancel -->
         <button type="button" class="btn btn-secondary" onclick="history.back()">Cancel</button>
+        <!-- Submit data -->
         <button type="submit" class="btn btn-success">Submit</button>
     </div>
 </form>

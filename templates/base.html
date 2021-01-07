@@ -90,7 +90,9 @@ ul.timeline > li:before {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Set favicon -->
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!-- Scripts for bitcoin donation button -->
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script><script type="text/javascript" src="{{ url_for('static', filename='js/pay-now-button.js') }}"></script>
     <title>{% block title %} {% endblock %}</title>
 </head>
@@ -136,6 +138,7 @@ ul.timeline > li:before {
         <center><small>A <a target="_blank" href="https://gtfkd.com">synfinner <i class="fas fa-external-link-alt"></i></a> project</small></center>
         <br />
     </div>
+    <!-- Why are you looking at this? -->
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- Title setup to check if investigation is archived or not -->
 <title>{% block title %}{{ investigation['investigation_name'] }}{% endblock %}</title>
     {% if investigation['investigation_archived'] == 1%}
         <h2 style="color:gray">[Archived] {{ investigation['investigation_name'] }}</h2>
@@ -28,6 +29,7 @@
     <hr>
     <p>
   <div style="padding: 10px; overflow:scroll; overflow-y:scroll; " class="table-responsive">
+    <!-- Table for artifacts. Populated from investigation's artifacts via for loop -->
     <table id="myTable" class="table table-striped" style="width:100%">
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search artifacts..." title="Type in data">
         <caption>Artifacts</caption>
@@ -55,6 +57,7 @@
     </tbody>
 </table>
 </div>
+<!-- Simple table search -->
 <script>
 function myFunction() {
   var input, filter, table, tr, td, i, txtValue;
