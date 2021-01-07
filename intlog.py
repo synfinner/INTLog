@@ -17,6 +17,7 @@ import csv
 import os.path
 import create_db
 
+# Establish SQLITE db connection and return it. 
 def get_db_connection():
     conn = sqlite3.connect('data/intlog.sqlite')
     conn.row_factory = sqlite3.Row
@@ -26,6 +27,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'WTFAMIDOINGWITHMYLIFE'
 fa = FontAwesome(app)
 
+# Function to get all the investigation IDs
 def get_inv(inv_id):
     conn = get_db_connection()
     investigation = conn.execute('SELECT * FROM investigations WHERE id = ?',
@@ -35,6 +37,7 @@ def get_inv(inv_id):
         abort(404)
     return investigation
 
+# Function to get all artifact entries in descending order by date
 def get_artifacts(inv_id):
     conn = get_db_connection()
     artifacts = conn.execute('SELECT * FROM artifacts WHERE investigation_id = ? ORDER BY artifact_date DESC',
@@ -44,6 +47,7 @@ def get_artifacts(inv_id):
         abort(404)
     return artifacts
 
+# Redundant function to get artifact entries in ascending order by date
 def get_artifacts_date_asc(inv_id):
     conn = get_db_connection()
     artifacts = conn.execute('SELECT * FROM artifacts WHERE investigation_id = ? ORDER BY artifact_date ASC',
@@ -53,6 +57,7 @@ def get_artifacts_date_asc(inv_id):
         abort(404)
     return artifacts
 
+# Broad function to get all artifacts
 def get_artifact(article_id):
     conn = get_db_connection()
     artifacts = conn.execute('SELECT * FROM artifacts WHERE id = ?',
@@ -62,6 +67,7 @@ def get_artifact(article_id):
         abort(404)
     return artifacts
 
+# Function to get all available artifact types. Used for dropdown to add new artifacts
 def get_types():
     conn = get_db_connection()
     types = conn.execute('SELECT * FROM types ORDER BY type ASC').fetchall()
@@ -70,13 +76,14 @@ def get_types():
         abort(404)
     return types
 
+# Route and function to get a timeline of artifacts per investigation
 @app.route('/<int:inv_id>/timeline')
 def timeline(inv_id):
     artifacts = get_artifacts_date_asc(inv_id)
     investigation = get_inv(inv_id)
     return render_template('timeline.html', investigation=investigation,artifacts=artifacts)
 
-
+# Function/route to return all artifacts in JSON format per investigation
 @app.route('/json_exp/<int:inv_id>')
 def json_exp(inv_id):
     conn = get_db_connection()
@@ -85,14 +92,12 @@ def json_exp(inv_id):
     conn.close()
     if artifacts is None:
         abort(404)
-    #data = []
     data = []
     for row in artifacts:
-        #data.append(list(row))
         data.append({'id':row[0],'artifact_type':row[3],'artifact_description':row[4],'artifact':row[5],'date_added':row[6],'flagged':row[7]})
     return jsonify(data)
 
-
+# Function/Route to create a new investigation
 @app.route('/create', methods=('GET', 'POST'))
 def create():
     if request.method == 'POST':
@@ -110,10 +115,10 @@ def create():
             return redirect(url_for('index'))
     return render_template('create.html')
 
+# Function/Route to add an artifact to an investigation
 @app.route('/<int:inv_id>/add_artifact',methods=('GET', 'POST'))
 def add_artifact(inv_id):
     if request.method == 'POST':
-        #artifact = request.form['artifact']
         artifact_type = request.form['type']
         artifact_data = request.form['artifact_data']
         artifact_desc = request.form['artifact_description']
@@ -130,7 +135,8 @@ def add_artifact(inv_id):
     types = get_types()
     return render_template('add_artifact.html',types=types)
 
-@app.route('/<int:inv_id>/export_artifacts',methods=('GET', 'POST'))
+# Function to get artifacts from an infestigation and export as CSV
+@app.route('/<int:inv_id>/export_artifacts',methods=('GET',))
 def export_artifacts(inv_id):
     conn = get_db_connection()
     si = io.StringIO()
@@ -144,7 +150,8 @@ def export_artifacts(inv_id):
     conn.close()
     return output
 
-@app.route('/delete_artifact/<int:artifact_id>',methods=('POST','GET'))
+# Function/route to delete an artifact. 
+@app.route('/delete_artifact/<int:artifact_id>',methods=('GET',))
 def delete_artifact(artifact_id):
     conn = get_db_connection()
     conn.execute('DELETE FROM artifacts WHERE id = ?', (artifact_id,))
@@ -153,6 +160,7 @@ def delete_artifact(artifact_id):
     flash("Removed artifact!")
     return redirect(request.referrer)
 
+# Function/Route to add a flag to an artifact entry
 @app.route('/add_flag/<int:artifact_id>', methods=('GET',))
 def add_flag(artifact_id):
     conn = get_db_connection()
@@ -160,6 +168,7 @@ def add_flag(artifact_id):
     conn.commit()
     return redirect(request.referrer)
 
+# Function/Route to remove a flag. Seperated for ease. 
 @app.route('/rem_flag/<int:artifact_id>', methods=('GET',))
 def rem_flag(artifact_id):
     conn = get_db_connection()
@@ -167,6 +176,7 @@ def rem_flag(artifact_id):
     conn.commit()
     return redirect(request.referrer)
 
+# Function/Route to delete an entire investigation
 @app.route('/delete_investigation/<int:inv_id>',methods=('POST','GET'))
 def delete_investigation(inv_id):
     conn = get_db_connection()
@@ -181,6 +191,7 @@ def delete_investigation(inv_id):
     flash('Deleted investigation!')
     return redirect(url_for('index'))
 
+# Function/Route to archive an investigation
 @app.route('/archive_inv/<int:inv_id>', methods=('GET',))
 def archive_inv(inv_id):
     conn = get_db_connection()
@@ -188,6 +199,7 @@ def archive_inv(inv_id):
     conn.commit()
     return redirect(request.referrer)
 
+# Function/Route to unarchive an investigation
 @app.route('/unarchive_inv/<int:inv_id>', methods=('GET',))
 def unarchive_inv(inv_id):
     conn = get_db_connection()
@@ -195,17 +207,16 @@ def unarchive_inv(inv_id):
     conn.commit()
     return redirect(request.referrer)
 
+# Function/Route to edit an artifact item
 @app.route('/edit_artifact/<int:artifact_id>',methods=('POST','GET'))
 def edit_artifact(artifact_id):
     args = request.args
     artifact = get_artifact(artifact_id)
     types = get_types()
     if request.method == 'POST':
-        #artifact = request.form['artifact']
         artifact_type = request.form['type']
         artifact_data = request.form['artifact_data']
         artifact_desc = request.form['artifact_description']
-        #date = datetime.datetime.now().replace(microsecond=0).isoformat()
         if not artifact_data:
             flash('An artifact is required!!!')
         else:
@@ -220,6 +231,7 @@ def edit_artifact(artifact_id):
                 return redirect(url_for('index'))
     return render_template('edit_artifact.html',artifact=artifact, types=types)
 
+# FunctionRoute for viewing an investigation
 @app.route('/<int:inv_id>')
 @app.route('/<int:inv_id>/')
 def investigation(inv_id):
@@ -227,10 +239,12 @@ def investigation(inv_id):
     artifacts = get_artifacts(inv_id)
     return render_template('investigation.html', investigation=investigation,artifacts=artifacts)
 
+# Function/Route to load the about page
 @app.route('/about')
 def about():
     return render_template('about.html')
 
+# Function/Route to view the archive and associated items
 @app.route('/archive')
 def archive():
     conn = get_db_connection()
@@ -239,15 +253,15 @@ def archive():
     conn.close()
     return render_template('archive.html',investigations=investigations) 
 
+# Function/Route for the index page
 @app.route('/')
 def index(page=1):
-    #return "wtf"
     conn = get_db_connection()
     investigations = conn.execute('SELECT * FROM investigations WHERE investigation_archived == 0 OR investigation_archived IS NULL ORDER BY investigation_date DESC').fetchall()
-    #print(investigations)
     conn.close()
     return render_template('index.html',investigations=investigations)
 
+# Function for initial DB creation
 def checkdb():
     if os.path.isfile('data/intlog.sqlite'):
         pass
@@ -255,5 +269,7 @@ def checkdb():
         create_db.create_db()
 
 if __name__ == "__main__":
+    # Perform DB creation check.
     checkdb()
+    # Run the app.
     app.run()
