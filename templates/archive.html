@@ -1,23 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class="fas fa-user-secret">{% block title %} INTLog Archive {% endblock %}</h1>
-    <p><font style="font-family:monospace">Past investigations</font></p>
-    <br>
-    {% if investigations|length < 1%}
-    <p>Nothing found in the archive.</p>
-    {% endif %}
-    {% for investigation in investigations %}
-    	<a href="{{ url_for('investigation', inv_id=investigation['id']) }}">
-    		<h2 style="color:gray">> [Archived] Investigation: {{ investigation['investigation_name']}}</h2>
-    	</a>
-    	<i class="fas fa-calendar-alt"></i>
-    	<span class="badge badge-primary">{{ investigation['investigation_date'] }}</span> | <a class="badge badge-warning" href="{{ url_for('unarchive_inv', inv_id=investigation['id']) }}">
-            <i class="fas fa-archive"></i> Remove from Archive</a> | <a style="color:red" title="Delete" class="fas fa-trash-alt" href="{{ url_for('delete_investigation', inv_id = investigation['id']) }}"></a>
-    	<p>
-    	<font style="font-family:monospace">
-    		<p>{{ investigation['investigation_desc'] }}<p>
-    	</font>
-    	<hr>
-    {% endfor %}
-{% endblock %}
+<h1 class="fas fa-user-secret">{% block title %} INTLog Archive {% endblock %}</h1>
+<p>
+	<font style="font-family:monospace">Past investigations</font>
+</p>
+<br>
+{% if investigations|length < 1%} <p>Nothing found in the archive.</p>
+	{% endif %}
+	{% for investigation in investigations %}
+	<a href="{{ url_for('investigation', inv_id=investigation['id']) }}">
+		<h2 style="color:gray">> [Archived] Investigation: {{ investigation['investigation_name']}}</h2>
+	</a>
+	<i class="fas fa-calendar-alt"></i>
+	<span class="badge badge-primary">{{ investigation['investigation_date'] }}</span> | <a class="badge badge-warning"
+		href="{{ url_for('unarchive_inv', inv_id=investigation['id']) }}">
+		<i class="fas fa-archive"></i> Remove from Archive</a> | <a style="color:red" title="Delete"
+		class="fas fa-trash-alt" href="{{ url_for('delete_investigation', inv_id = investigation['id']) }}"></a>
+	<p>
+		<font style="font-family:monospace">
+			<p>{{ investigation['investigation_desc'] }}
+			<p>
+		</font>
+		<hr>
+		{% endfor %}
+		{% endblock %}

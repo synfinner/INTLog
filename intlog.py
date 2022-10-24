@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# Version 1.0.5
+# Author: Synfinner
+# Site: https://gtfkd.com
+
 from flask import Flask
 from flask import render_template
 from flask import request

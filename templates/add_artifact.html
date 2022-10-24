@@ -9,20 +9,22 @@
         <label for="type">Choose artifact type:</label><br />
         <select name="type">
             <!-- Setup option selection for artifact types -->
-          <option value="" SELECTED></option>
-          {% for type in types %}
+            <option value="" SELECTED></option>
+            {% for type in types %}
             <option value="{{type['type']}}">{{type['type']}}{{request.form['type']}}</option>
-          {% endfor %}
+            {% endfor %}
 
         </select>
     </div>
     <div class="form-group">
         <label for="artifact">Artifact Data</label>
-        <input type="text" name="artifact_data" placeholder="https://example.com" class="form-control" value="{{ request.form['artifact_data'] }}"></input>
+        <input type="text" name="artifact_data" placeholder="https://example.com" class="form-control"
+            value="{{ request.form['artifact_data'] }}"></input>
     </div>
     <div class="form-group">
         <label for="artifact">Artifact Description</label>
-        <input type="text" name="artifact_description" placeholder="Found this item interesting because..." class="form-control" value="{{ request.form['artifact_description'] }}"></input>
+        <input type="text" name="artifact_description" placeholder="Found this item interesting because..."
+            class="form-control" value="{{ request.form['artifact_description'] }}"></input>
     </div>
     <div class="form-group">
         <!-- Go back to investigation on cancel -->
