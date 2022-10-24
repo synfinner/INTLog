@@ -3,87 +3,99 @@
 
 <head>
     <style>
-html,
-body {
-  height: 100%;
+        html,
+        body {
+            height: 100%;
 
-}
+        }
 
-#page-container {
-  position: relative;
-  min-height: 100vh;
-}
+        #page-container {
+            position: relative;
+            min-height: 100vh;
+        }
 
-#content-wrap {
-  padding-bottom: 2.5rem;    /* Footer height */
-}
+        #content-wrap {
+            padding-bottom: 2.5rem;
+            /* Footer height */
+        }
 
-#footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
 
-}
-a.hover_gray:hover  { color: gray !important;  }
-td {
-       max-width: 200px;
-       word-wrap: break-word;
-     }
-table {
-    table-layout:auto;
-    border: 1px solid black;
-}
+        }
 
-th.options {
-  width: 11%;
-}
-th.flagged{
-    width: 5%;
-}
-th.artifactdate{
-    width: 18%;
-}
-#myInput {
+        a.hover_gray:hover {
+            color: gray !important;
+        }
 
-  background-repeat: no-repeat;
-  width: 25%;
-  font-size: 13px;
-  padding: 4px 8px 4px 8px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-ul.timeline {
-    list-style-type: none;
-    position: relative;
-}
+        td {
+            max-width: 200px;
+            word-wrap: break-word;
+        }
 
-ul.timeline:before {
-    content: ' ';
-    background: #d4d9df;
-    display: inline-block;
-    position: absolute;
-    left: 29px;
-    width: 2px;
-    height: 100%;
-    z-index: 400;
-}
-ul.timeline > li {
-    margin: 20px 0;
-    padding-left: 20px;
-}
-ul.timeline > li:before {
-    content: ' ';
-    background: white;
-    display: inline-block;
-    position: absolute;
-    border-radius: 50%;
-    border: 3px solid #22c0e8;
-    left: 20px;
-    width: 20px;
-    height: 20px;
-    z-index: 400;
-}
-</style>
+        table {
+            table-layout: auto;
+            border: 1px solid black;
+        }
+
+        th.options {
+            width: 11%;
+        }
+
+        th.flagged {
+            width: 5%;
+        }
+
+        th.artifactdate {
+            width: 18%;
+        }
+
+        #myInput {
+
+            background-repeat: no-repeat;
+            width: 25%;
+            font-size: 13px;
+            padding: 4px 8px 4px 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+
+        ul.timeline {
+            list-style-type: none;
+            position: relative;
+        }
+
+        ul.timeline:before {
+            content: ' ';
+            background: #d4d9df;
+            display: inline-block;
+            position: absolute;
+            left: 29px;
+            width: 2px;
+            height: 100%;
+            z-index: 400;
+        }
+
+        ul.timeline>li {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        ul.timeline>li:before {
+            content: ' ';
+            background: white;
+            display: inline-block;
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid #22c0e8;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            z-index: 400;
+        }
+    </style>
     <!-- Required meta tags -->
     {{ fontawesome_html() }}
     <meta charset="utf-8">
@@ -92,30 +104,33 @@ ul.timeline > li:before {
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <!-- Set favicon -->
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <!-- Scripts for bitcoin donation button -->
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script><script type="text/javascript" src="{{ url_for('static', filename='js/pay-now-button.js') }}"></script>
     <title>{% block title %} {% endblock %}</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a class="navbar-brand" href="{{ url_for('index')}}">»INTLog</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link mx-1 hover_gray" href="{{ url_for('index') }}">{ <i class="fas fa-home"></i> Home }</a>
+                    <a class="nav-link mx-1 hover_gray" href="{{ url_for('index') }}">{ <i class="fas fa-home"></i> Home
+                        }</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link mx-1 hover_gray" href="{{ url_for('create') }}">{ <i class="fas fa-plus-square"></i> New Investigation }</a>
+                    <a class="nav-link mx-1 hover_gray" href="{{ url_for('create') }}">{ <i
+                            class="fas fa-plus-square"></i> New Investigation }</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link mx-1 hover_gray" href="{{ url_for('archive') }}">{ <i class="fas fa-archive"></i> Archive }</a>
+                    <a class="nav-link mx-1 hover_gray" href="{{ url_for('archive') }}">{ <i class="fas fa-archive"></i>
+                        Archive }</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link mx-1 hover_gray" href="{{ url_for('about') }}">{ <i class="fas fa-info"></i> About }</a>
+                    <a class="nav-link mx-1 hover_gray" href="{{ url_for('about') }}">{ <i class="fas fa-info"></i>
+                        About }</a>
                 </li>
             </ul>
         </div>
@@ -130,12 +145,13 @@ ul.timeline > li:before {
         </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery-3.6.1.slim.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
         <br />
         <hr>
-        <center><small>A <a target="_blank" href="https://gtfkd.com">synfinner <i class="fas fa-external-link-alt"></i></a> project</small></center>
+        <center><small>A <a target="_blank" href="https://gtfkd.com">synfinner <i
+                        class="fas fa-external-link-alt"></i></a> project</small></center>
         <br />
     </div>
     <!-- Why are you looking at this? -->
