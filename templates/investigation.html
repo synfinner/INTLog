@@ -27,6 +27,9 @@
 </a> |
 <a href="{{ url_for('export_artifacts', inv_id=investigation['id']) }}">
   <button type="button" class="btn btn-info btn-sm"><i class="fas fa-download"></i> Export Artifacts (CSV)</button>
+</a> |
+<a href="{{ url_for('json_exp', inv_id=investigation['id']) }}" target="_blank">
+  <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Export Artifacts (JSON)</button>
 </a>
 
 <hr>
@@ -49,8 +52,8 @@
     <tbody>
       {% for artifact in artifacts %}
       <tr>
-        <td>{%if artifact['flagged'] == 1%}<a title="Remove flag" style="color:red" class="fas fa-flag"
-            href="{{ url_for('rem_flag', artifact_id = artifact['id']) }}"></a>{% else %}<a title="Add flag"
+        <td>{%if artifact['flagged'] == 1%}<a data-toggle="tooltip" data-placement="right" title="Remove flag" style="color:red" class="fas fa-flag"
+            href="{{ url_for('rem_flag', artifact_id = artifact['id']) }}"></a>{% else %}<a data-toggle="tooltip" data-placement="right" title="Add flag"
             style="color:gray" class="fas fa-flag" href="{{ url_for('add_flag', artifact_id = artifact['id']) }}"></a>{%
           endif %}</td>
         <td>
