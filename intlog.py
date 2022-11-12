@@ -265,6 +265,11 @@ def index(page=1):
     conn.close()
     return render_template('index.html',investigations=investigations)
 
+# Function for handling 404 errors instead of just breaking.
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html")
+
 # Function for initial DB creation
 def checkdb():
     if os.path.isfile('data/intlog.sqlite'):
