@@ -10,7 +10,7 @@ This project is in an EXTREMELY early stage. Stuff is likely terrible.
 
 - Support pagination
 - Likely fix things
-- Export to JSON
+- ~~Export to JSON~~
 - Clean up templates
 - ~~Move artifact types to sqlite table so we can dynamically generate types when adding a new artifact.~~ 
 - Contemplate existence
@@ -37,7 +37,7 @@ INTLog allows you to export all artifacts within an investigtion to a csv file. 
 
 ### JSON Output
 
-Users can pull investigation data in JSON format by accessing the `/json_exp/` endpoint. For example, `http://127.0.0.1:5000/json_exp/3` outputs: 
+Each investigation features an "Export Artifacts (JSON)" button for easy JSON Export. Example output: 
 
 ```
 [
