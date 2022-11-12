@@ -51,5 +51,6 @@ def create_db():
   (12, 'HumanName'),
   (13, 'Domain'),
   (14, 'Email'),
-  (15, 'CIDR');""")
+  (15, 'CIDR'),
+  (16, 'CVE');""")
   conn.commit()
