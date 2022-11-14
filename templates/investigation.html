@@ -57,7 +57,11 @@
             style="color:gray" class="fas fa-flag" href="{{ url_for('add_flag', artifact_id = artifact['id']) }}"></a>{%
           endif %}</td>
         <td>
+          {%if "CVE" in artifact['artifact_reference']%}
+          <a href="https://nvd.nist.gov/vuln/detail/{{ artifact['artifact_reference']}}" target="_blank"><font style="font-family:monospace">{{ artifact['artifact_reference'] }}</font></a>
+          {% else %}
           <font style="font-family:monospace">{{ artifact['artifact_reference'] }}</font>
+          {% endif %}
         </td>
         <td>
           <font style="font-family:monospace">{{ artifact['artifact_type'] }}</font>
