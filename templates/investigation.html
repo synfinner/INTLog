@@ -10,9 +10,9 @@
 <h2>{{ investigation['investigation_name'] }}</h2>
 
 {% endif %}
-<i class="fas fa-calendar-alt"></i>
+<i class="bi bi-calendar-week-fill"></i>
 <span class="badge badge-primary">{{ investigation['investigation_date'] }}</span> | <a style="color:red" title="Delete"
-  class="fas fa-trash-alt" href="{{ url_for('delete_investigation', inv_id = investigation['id']) }}"></a>
+  class="bi bi-trash-fill" href="{{ url_for('delete_investigation', inv_id = investigation['id']) }}"></a>
 <p>
 <p>
   <font style="font-family:monospace">{{ investigation['investigation_desc'] }}</font>
@@ -20,16 +20,16 @@
 <hr>
 
 <a href="{{ url_for('add_artifact', inv_id=investigation['id']) }}">
-  <button type="button" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Add Artifact</button>
+  <button type="button" class="btn btn-success btn-sm"><i class="bi bi-plus-square-fill"></i> Add Artifact</button>
 </a> |
 <a href="{{ url_for('timeline', inv_id=investigation['id']) }}">
-  <button type="button" class="btn btn-info btn-sm"><i class="fas fa-project-diagram"></i> Artifact Timeline</button>
+  <button type="button" class="btn btn-info btn-sm"><i class="bi bi-diagram-2"></i> Artifact Timeline</button>
 </a> |
 <a href="{{ url_for('export_artifacts', inv_id=investigation['id']) }}">
-  <button type="button" class="btn btn-info btn-sm"><i class="fas fa-download"></i> Export Artifacts (CSV)</button>
+  <button type="button" class="btn btn-info btn-sm"><i class="bi bi-filetype-csv"></i> Export Artifacts (CSV)</button>
 </a> |
 <a href="{{ url_for('json_exp', inv_id=investigation['id']) }}" target="_blank">
-  <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Export Artifacts (JSON)</button>
+  <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-filetype-json"></i> Export Artifacts (JSON)</button>
 </a>
 
 <hr>
@@ -53,8 +53,8 @@
       {% for artifact in artifacts %}
       <tr>
         <td>{%if artifact['flagged'] == 1%}<a data-toggle="tooltip" data-placement="right" title="Remove flag"
-            style="color:red" class="fas fa-flag" href="{{ url_for('rem_flag', artifact_id = artifact['id']) }}"></a>{%
-          else %}<a data-toggle="tooltip" data-placement="right" title="Add flag" style="color:gray" class="fas fa-flag"
+            style="color:red" class="bi bi-flag-fill" href="{{ url_for('rem_flag', artifact_id = artifact['id']) }}"></a>{%
+          else %}<a data-toggle="tooltip" data-placement="right" title="Add flag" style="color:gray" class="bi bi-flag-fill"
             href="{{ url_for('add_flag', artifact_id = artifact['id']) }}"></a>{%
           endif %}</td>
         <td>

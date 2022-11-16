@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>{% block title %} {{ investigation['investigation_name'] }} Timeline {% endblock %}</h2>
-<i class="fas fa-calendar-alt"></i>
+<i class="bi bi-calendar-week-fill"></i>
 <span class="badge badge-primary">{{ investigation['investigation_date'] }}</span>
 <p>
 <p>
@@ -10,7 +10,7 @@
 </p>
 <hr>
 <a href="{{ url_for('investigation', inv_id=investigation['id']) }}">
-  <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-arrow-left"></i> Back to Investigation</button>
+  <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-arrow-left"></i> Back to Investigation</button>
 </a>
 <hr>
 <div class="container">

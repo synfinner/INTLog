@@ -12,7 +12,6 @@ from flask import flash
 from flask import redirect
 from flask import make_response
 from flask import jsonify
-from flask_fontawesome import FontAwesome
 import sqlite3
 from werkzeug.exceptions import abort
 import datetime
@@ -29,7 +28,6 @@ def get_db_connection():
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'WTFAMIDOINGWITHMYLIFE'
-fa = FontAwesome(app)
 
 # Function to get all the investigation IDs
 def get_inv(inv_id):
