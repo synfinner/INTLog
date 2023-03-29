@@ -29,7 +29,7 @@ def get_db_connection():
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'WTFAMIDOINGWITHMYLIFE'
 
-# Function to get all the investigation IDs
+# Function to get all the investigation IDs 
 def get_inv(inv_id):
     conn = get_db_connection()
     investigation = conn.execute('SELECT * FROM investigations WHERE id = ?',
@@ -141,15 +141,19 @@ def add_artifact(inv_id):
 @app.route('/<int:inv_id>/export_artifacts',methods=('GET',))
 def export_artifacts(inv_id):
     conn = get_db_connection()
+    rows = conn.execute('SELECT artifact_reference, artifact_type, artifact_desc, artifact_date FROM artifacts WHERE investigation_id = ?',
+                         (inv_id,)).fetchall()
+    conn.close()
+    # Add error handling if there are no artifacts
+    if not rows:
+        flash('No artifacts found for this investigation!')
+        return redirect(request.referrer)
     si = io.StringIO()
     cw = csv.writer(si)
-    rows = conn.execute('SELECT artifact_reference, artifact_type, artifact_desc, artifact_date FROM artifacts WHERE investigation_id = ?',
-                        (inv_id,)).fetchall()
     cw.writerows(rows)
     output = make_response(si.getvalue())
     output.headers["Content-Disposition"] = "attachment; filename=artifact_export.csv"
     output.headers["Content-type"] = "text/csv"
-    conn.close()
     return output
 
 # Function/route to delete an artifact. 
@@ -266,7 +270,7 @@ def index(page=1):
 # Function for handling 404 errors instead of just breaking.
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("404.html")
+    return render_template("404.html"), 404
 
 # Function for initial DB creation
 def checkdb():
